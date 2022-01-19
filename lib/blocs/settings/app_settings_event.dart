@@ -15,3 +15,11 @@ class ToggleTheme extends AppSettingsEvent {
   @override
   List<Object?> get props => [appTheme];
 }
+
+class ChangeLocale extends AppSettingsEvent {
+  final Locale? locale;
+
+  ChangeLocale(this.locale);
+  @override
+  List<Object?> get props => [];
+}

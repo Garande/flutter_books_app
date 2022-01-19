@@ -37,6 +37,8 @@ dependencies:
   firebase_database: ^9.0.5
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_bloc: ^8.0.1
   google_sign_in: ^5.2.3
   shared_preferences: ^2.0.12
@@ -51,6 +53,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
 flutter:
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

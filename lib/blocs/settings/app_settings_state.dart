@@ -15,3 +15,11 @@ class ThemeState extends AppSettingsState {
   @override
   List<Object?> get props => [appTheme];
 }
+
+class LocaleState extends AppSettingsState {
+  final Locale locale;
+
+  LocaleState(this.locale);
+  @override
+  List<Object?> get props => [locale];
+}
