@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1068350905690",
+    "project_id": "bookmate-6bd3a",
+    "storage_bucket": "bookmate-6bd3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068350905690:android:4c5b3f6ab285c6fbe32763",
+        "android_client_info": {
+          "package_name": "com.example.book_mate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068350905690-ugu8qnva3evimi4jp2uqjmc0739reon8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.book_mate",
+            "certificate_hash": "a29a22a77cc46cf224cd465caeede02654e5b85b"
+          }
+        },
+        {
+          "client_id": "1068350905690-3dnesq0q4kbo02pjmellhvpi8ijk1j6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJW3OYEmvUnZHvLvYPyWReQNvN5Yz01x4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068350905690-3dnesq0q4kbo02pjmellhvpi8ijk1j6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

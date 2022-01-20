@@ -2,13 +2,16 @@ import 'package:book_mate/blocs/settings/app_settings_bloc.dart';
 import 'package:book_mate/l10n/l10n.dart';
 import 'package:book_mate/utils/app_palette.dart';
 import 'package:book_mate/utils/constants.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'generated/app_localizations.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     MultiBlocProvider(
       providers: [
