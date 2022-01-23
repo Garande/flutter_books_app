@@ -5,7 +5,7 @@ import 'hex_color.dart';
 class AppPalette {
   AppPalette._();
 
-  static const fontName = 'Poppin';
+  static const fontName = 'Poppins';
 
   static const Color primaryBlueColor = Color(0xFF8F94FB);
   static const Color primaryBlueDark = Color(0xFF4E54C8);
