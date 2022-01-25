@@ -107,6 +107,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign In'**
   String get sign_in;
+
+  /// No description provided for @sign_in_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to your account to continue enjoying our book app'**
+  String get sign_in_message;
+
+  /// No description provided for @app_agreement_overview.
+  ///
+  /// In en, this message translates to:
+  /// **'By tapping continue, you agree to our '**
+  String get app_agreement_overview;
+
+  /// No description provided for @terms_and_conditions.
+  ///
+  /// In en, this message translates to:
+  /// **' Terms & Conditions '**
+  String get terms_and_conditions;
+
+  /// No description provided for @and.
+  ///
+  /// In en, this message translates to:
+  /// **'and '**
+  String get and;
+
+  /// No description provided for @privacy_policy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacy_policy;
+
+  /// No description provided for @var_of.
+  ///
+  /// In en, this message translates to:
+  /// **'of'**
+  String get var_of;
+
+  /// No description provided for @btn_continue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get btn_continue;
+
+  /// No description provided for @verify_otp.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify OTP'**
+  String get verify_otp;
+
+  /// No description provided for @verify_otp_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the OTP code sent to '**
+  String get verify_otp_message;
+
+  /// No description provided for @failed_to_get_otp_message.
+  ///
+  /// In en, this message translates to:
+  /// **'If you didn\'t receive the verification code, tap to Resend '**
+  String get failed_to_get_otp_message;
+
+  /// No description provided for @resend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get resend;
+
+  /// No description provided for @verify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verify;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

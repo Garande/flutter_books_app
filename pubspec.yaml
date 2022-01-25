@@ -30,6 +30,7 @@ dependencies:
   async: ^2.8.1
   bloc: ^8.0.2
   cloud_firestore: ^3.1.6
+  country_code_picker: ^2.0.2
   cupertino_icons: ^1.0.2
   equatable: ^2.0.3
   firebase_auth: ^3.3.5
@@ -37,9 +38,9 @@ dependencies:
   firebase_database: ^9.0.5
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.0.1
   flutter_localizations:
     sdk: flutter
-  flutter_bloc: ^8.0.1
   google_sign_in: ^5.2.3
   shared_preferences: ^2.0.12
   sqflite: ^2.0.2

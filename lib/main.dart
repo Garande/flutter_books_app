@@ -2,6 +2,7 @@ import 'package:book_mate/blocs/authentication/authentication_bloc.dart';
 import 'package:book_mate/blocs/settings/app_settings_bloc.dart';
 import 'package:book_mate/l10n/l10n.dart';
 import 'package:book_mate/repositories/authentication_repository.dart';
+import 'package:book_mate/route_generator.dart';
 import 'package:book_mate/utils/app_palette.dart';
 import 'package:book_mate/utils/constants.dart';
 import 'package:book_mate/views/home/home_screen.dart';
@@ -62,17 +63,16 @@ class MyApp extends StatelessWidget {
           theme: AppPalette.themeData[_appTheme] ??
               AppPalette.themeData[AppTheme.darkBlueTheme],
           debugShowCheckedModeBanner: false,
+          onGenerateRoute: RouteGenerator.generateRoute,
           home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
-              return const SplashScreen();
-
-              // if (state is Authenticated) {
-              //   return const HomeScreen();
-              // } else if (state is UnAuthenticated) {
-              //   return const SignInScreen();
-              // } else {
-              //   return const SplashScreen();
-              // }
+              if (state is Authenticated) {
+                return const HomeScreen();
+              } else if (state is UnAuthenticated) {
+                return const SignInScreen();
+              } else {
+                return const SplashScreen();
+              }
             },
           ),
         );
