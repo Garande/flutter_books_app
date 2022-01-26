@@ -4,16 +4,16 @@
         "description": "The current language is English"
     },
     "sign_in": "Sign In",
-    "sign_in_message": "Sign in to your account to continue enjoying our book app",
-    "app_agreement_overview": "By tapping continue, you agree to our ",
-    "terms_and_conditions": " Terms & Conditions ",
-    "and": "and ",
-    "privacy_policy": "Privacy Policy",
-    "var_of": "of",
+    "sign_in_message": "Sign in to your account to continue enjoying your favorite Book app",
+    "phone_number": "Phone Number",
     "btn_continue": "Continue",
+    "app_agreement_overview": "By tapping continue, you agree to our ",
+    "terms_and_conditions": "Terms & Conditions",
+    "var_and": " and ",
+    "privacy_policy": "Privacy Policy",
+    "var_of": " of ",
     "verify_otp": "Verify OTP",
-    "verify_otp_message": "Enter the OTP code sent to ",
-    "failed_to_get_otp_message": "If you didn't receive the verification code, tap to Resend ",
-    "resend": "Resend",
-    "verify": "Verify"
+    "verify": "Verify",
+    "btn_resend": "Resend",
+    "verify_view_message": "Enter the verification code sent to "
 }

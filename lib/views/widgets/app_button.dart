@@ -5,18 +5,19 @@ class AppButton extends StatelessWidget {
     Key? key,
     this.child,
     this.text,
-    this.gradient,
+    this.height = 40,
     this.width,
-    this.height = 40.0,
     this.borderRadius = 5.0,
     this.isOutlined = false,
+    this.gradient,
     this.onTap,
   }) : super(key: key);
   final Widget? child;
   final String? text;
-  final Gradient? gradient;
-  final double? width, height, borderRadius;
+  final double? height, width;
+  final double borderRadius;
   final bool isOutlined;
+  final Gradient? gradient;
   final VoidCallback? onTap;
 
   @override
@@ -25,24 +26,23 @@ class AppButton extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        gradient: !isOutlined && gradient != null ? gradient! : null,
-        borderRadius: BorderRadius.circular(borderRadius!),
+        borderRadius: BorderRadius.circular(borderRadius),
         border: isOutlined
             ? Border.all(
                 color: Theme.of(context).primaryColor,
-                width: 2.0,
+                width: 1.8,
               )
             : null,
+        gradient: !isOutlined && gradient != null ? gradient : null,
       ),
       child: Material(
-        borderRadius: BorderRadius.circular(borderRadius!),
         color: !isOutlined && gradient == null
             ? Theme.of(context).primaryColor
             : Colors.transparent,
+        borderRadius: BorderRadius.circular(borderRadius),
         child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(borderRadius!),
           highlightColor: Colors.transparent,
+          onTap: onTap,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

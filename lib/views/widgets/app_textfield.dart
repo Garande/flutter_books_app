@@ -4,45 +4,44 @@ import 'package:flutter/material.dart';
 class AppTextField extends StatelessWidget {
   const AppTextField({
     Key? key,
-    this.controller,
     this.hintText,
-    this.inputType,
-    this.onChanged,
-    this.borderRadius = 5.0,
-    this.fontSize = 15.0,
     this.autofocus = false,
-    this.prefixIcon,
+    this.borderRadius = 5.0,
+    this.controller,
+    this.onChanged,
     this.focusNode,
+    this.inputType,
+    this.fontSize = 15.0,
+    this.prefix,
   }) : super(key: key);
-  final TextEditingController? controller;
   final String? hintText;
-  final TextInputType? inputType;
-  final Function(String txt)? onChanged;
-  final double borderRadius;
-  final double fontSize;
   final bool autofocus;
-  final Widget? prefixIcon;
+  final double borderRadius;
+  final TextEditingController? controller;
+  final Function(String txt)? onChanged;
   final FocusNode? focusNode;
+  final TextInputType? inputType;
+  final double fontSize;
+  final Widget? prefix;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      style: Theme.of(context).textTheme.bodyText1?.copyWith(
-            fontSize: fontSize,
-          ),
-      autofocus: autofocus,
-      focusNode: focusNode,
       keyboardType: inputType,
+      autofocus: autofocus,
+      onChanged: onChanged,
+      focusNode: focusNode,
+      style:
+          Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: fontSize),
       decoration: InputDecoration(
         hintText: hintText,
-        fillColor: Colors.grey[300]?.withOpacity(.7),
-        prefixIcon: prefixIcon,
         filled: true,
+        prefixIcon: prefix,
+        fillColor:
+            Theme.of(context).textTheme.bodyText1?.color?.withOpacity(.2),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius),
-          ),
+          borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide.none,
         ),
         contentPadding: const EdgeInsets.symmetric(
@@ -50,16 +49,13 @@ class AppTextField extends StatelessWidget {
           vertical: AppConstants.padding / 2,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius),
-          ),
+          borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
+            width: 1.8,
             color: Theme.of(context).primaryColor,
-            width: 2.0,
           ),
         ),
       ),
-      onChanged: onChanged,
     );
   }
 }

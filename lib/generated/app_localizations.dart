@@ -111,8 +111,20 @@ abstract class AppLocalizations {
   /// No description provided for @sign_in_message.
   ///
   /// In en, this message translates to:
-  /// **'Sign in to your account to continue enjoying our book app'**
+  /// **'Sign in to your account to continue enjoying your favorite Book app'**
   String get sign_in_message;
+
+  /// No description provided for @phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phone_number;
+
+  /// No description provided for @btn_continue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get btn_continue;
 
   /// No description provided for @app_agreement_overview.
   ///
@@ -123,14 +135,14 @@ abstract class AppLocalizations {
   /// No description provided for @terms_and_conditions.
   ///
   /// In en, this message translates to:
-  /// **' Terms & Conditions '**
+  /// **'Terms & Conditions'**
   String get terms_and_conditions;
 
-  /// No description provided for @and.
+  /// No description provided for @var_and.
   ///
   /// In en, this message translates to:
-  /// **'and '**
-  String get and;
+  /// **' and '**
+  String get var_and;
 
   /// No description provided for @privacy_policy.
   ///
@@ -141,14 +153,8 @@ abstract class AppLocalizations {
   /// No description provided for @var_of.
   ///
   /// In en, this message translates to:
-  /// **'of'**
+  /// **' of '**
   String get var_of;
-
-  /// No description provided for @btn_continue.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue'**
-  String get btn_continue;
 
   /// No description provided for @verify_otp.
   ///
@@ -156,29 +162,23 @@ abstract class AppLocalizations {
   /// **'Verify OTP'**
   String get verify_otp;
 
-  /// No description provided for @verify_otp_message.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter the OTP code sent to '**
-  String get verify_otp_message;
-
-  /// No description provided for @failed_to_get_otp_message.
-  ///
-  /// In en, this message translates to:
-  /// **'If you didn\'t receive the verification code, tap to Resend '**
-  String get failed_to_get_otp_message;
-
-  /// No description provided for @resend.
-  ///
-  /// In en, this message translates to:
-  /// **'Resend'**
-  String get resend;
-
   /// No description provided for @verify.
   ///
   /// In en, this message translates to:
   /// **'Verify'**
   String get verify;
+
+  /// No description provided for @btn_resend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get btn_resend;
+
+  /// No description provided for @verify_view_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the verification code sent to '**
+  String get verify_view_message;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
