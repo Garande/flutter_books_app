@@ -1,10 +1,221 @@
+import 'dart:io';
+
+import 'package:book_mate/generated/app_localizations.dart';
+import 'package:book_mate/utils/constants.dart';
+import 'package:book_mate/views/widgets/app_textfield.dart';
+import 'package:book_mate/views/widgets/avatar.dart';
+import 'package:book_mate/views/widgets/selectable_app_textfield.dart';
 import 'package:flutter/material.dart';
 
 class CompleteAuthView extends StatelessWidget {
-  const CompleteAuthView({Key? key}) : super(key: key);
+  CompleteAuthView({Key? key}) : super(key: key);
+
+  File? image;
+
+  List gender = ["MALE", "FEMALE"];
+  String? select;
+  bool isLoading = false;
+
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now().add(const Duration(days: 5));
+  DateTime? dateOfBirth;
+
+  final dateOfBithController = TextEditingController();
+
+  void showCalender({required BuildContext context}) async {
+    // var now = DateTime.now();
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      firstDate: DateTime(1920),
+      initialDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null) {
+      dateOfBirth = picked;
+      // dateOfBithController.text = Helper.formatDateMonth(picked);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.orange);
+    Size size = MediaQuery.of(context).size;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppConstants.padding,
+        vertical: AppConstants.padding,
+      ),
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: size.height * 0.085),
+            _buildHeader(context),
+            const SizedBox(height: 10),
+            _buildMessageView(context),
+            const SizedBox(height: 10),
+            _buildUserAvatar(context),
+            const SizedBox(height: 10),
+            AppTextField(
+              label: AppLocalizations.of(context)!.lastName,
+              hintText: AppLocalizations.of(context)!.lastName,
+            ),
+            const SizedBox(height: 10),
+            AppTextField(
+              label: AppLocalizations.of(context)!.lastName,
+              hintText: AppLocalizations.of(context)!.lastName,
+            ),
+            const SizedBox(height: 10),
+            AppTextField(
+              label: AppLocalizations.of(context)!.email,
+              hintText: AppLocalizations.of(context)!.email,
+            ),
+            const SizedBox(height: 10),
+            SelectableAppTextField(
+              label: AppLocalizations.of(context)!.dob,
+              hintText: AppLocalizations.of(context)!.dob,
+              onTap: () {
+                showCalender(context: context);
+              },
+              controller: dateOfBithController,
+            ),
+            const SizedBox(height: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  AppLocalizations.of(context)!.gender,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(),
+                ),
+                //Use the above widget where you want the radio button
+                SizedBox(
+                  height: 50,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      addRadioButton(
+                          0, AppLocalizations.of(context)!.male, context),
+                      addRadioButton(
+                          1, AppLocalizations.of(context)!.female, context),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            AppTextField(
+              label: AppLocalizations.of(context)!.bio,
+              hintText: AppLocalizations.of(context)!.enter_about,
+            ),
+            const SizedBox(height: 10),
+          ],
+        ),
+      ),
+    );
+  }
+
+  RichText _buildMessageView(BuildContext context) {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: AppLocalizations.of(context)!.complete_profile_msg,
+            style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Row _buildHeader(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          AppLocalizations.of(context)!.complete_profile,
+          style: Theme.of(context).textTheme.headline1?.copyWith(
+                color: Theme.of(context).primaryColor,
+              ),
+        ),
+        // const Icon(Icons.menu),
+      ],
+    );
+  }
+
+  Row _buildUserAvatar(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Stack(
+          children: [
+            const Avatar(
+              size: 110,
+              photoUrl:
+                  'https://www.goodmorninghdloveimages.com/wp-content/uploads/2020/04/Whatsapp-Profile-Photo-Download-7.jpg',
+            ),
+            Positioned(
+              child: Container(
+                height: 45,
+                width: 45,
+                decoration: BoxDecoration(
+                  // color: Colors.red,
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(
+                    width: 2.5,
+                    color: Colors.white,
+                  ),
+                ),
+                child: Material(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Theme.of(context).primaryColor,
+                  clipBehavior: Clip.hardEdge,
+                  child: InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(100),
+                    child: const Icon(
+                      Icons.camera_alt_outlined,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              top: 0,
+              right: 0,
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  Row addRadioButton(int btnValue, String title, BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio<String>(
+          activeColor: Theme.of(context).colorScheme.secondary,
+          value: gender[btnValue],
+          groupValue: select,
+          onChanged: (value) {
+            select = value;
+          },
+        ),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                fontSize: 14.0,
+              ),
+        )
+      ],
+    );
   }
 }

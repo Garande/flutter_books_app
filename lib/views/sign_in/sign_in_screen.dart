@@ -38,7 +38,7 @@ class _SignInScreenState extends State<SignInScreen>
         body: TabBarView(controller: _tabController, children: [
           const PhoneAuthView(),
           VerifyPhoneAuthView(),
-          const CompleteAuthView(),
+          CompleteAuthView(),
         ]),
       ),
     );

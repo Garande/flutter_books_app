@@ -48,4 +48,37 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get verify_view_message => 'Enter the verification code sent to ';
+
+  @override
+  String get firstName => 'First Name';
+
+  @override
+  String get lastName => 'Last Name';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get dob => 'Date of Birth';
+
+  @override
+  String get gender => 'Gender';
+
+  @override
+  String get male => 'Male';
+
+  @override
+  String get female => 'Female';
+
+  @override
+  String get bio => 'Bio';
+
+  @override
+  String get enter_about => 'Enter about';
+
+  @override
+  String get complete_profile => 'Complete your Profile';
+
+  @override
+  String get complete_profile_msg => '\'Add a profile photo, name and bio to let people know who you are';
 }

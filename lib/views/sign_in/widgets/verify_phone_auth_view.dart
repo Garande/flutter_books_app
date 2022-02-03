@@ -2,7 +2,6 @@ import 'package:book_mate/generated/app_localizations.dart';
 import 'package:book_mate/utils/constants.dart';
 import 'package:book_mate/views/widgets/app_button.dart';
 import 'package:book_mate/views/widgets/app_textfield.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class VerifyPhoneAuthView extends StatelessWidget {
@@ -10,12 +9,12 @@ class VerifyPhoneAuthView extends StatelessWidget {
 
   String code = '';
 
-  FocusNode focusNode1 = FocusNode();
-  FocusNode focusNode2 = FocusNode();
-  FocusNode focusNode3 = FocusNode();
-  FocusNode focusNode4 = FocusNode();
-  FocusNode focusNode5 = FocusNode();
-  FocusNode focusNode6 = FocusNode();
+  final focusNode1 = FocusNode();
+  final focusNode2 = FocusNode();
+  final focusNode3 = FocusNode();
+  final focusNode4 = FocusNode();
+  final focusNode5 = FocusNode();
+  final focusNode6 = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -33,23 +32,7 @@ class VerifyPhoneAuthView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: size.height * 0.085),
-            Row(
-              children: [
-                InkWell(
-                  onTap: () {},
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: themeData.primaryColor,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  AppLocalizations.of(context)!.verify_otp,
-                  style: themeData.textTheme.headline1
-                      ?.copyWith(color: themeData.primaryColor),
-                ),
-              ],
-            ),
+            _buildHeader(themeData, context),
             _buildViewMessage(context, themeData),
             const SizedBox(
               height: 10,
@@ -58,38 +41,66 @@ class VerifyPhoneAuthView extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    AppLocalizations.of(context)!.btn_resend,
-                    style: themeData.textTheme.subtitle1
-                        ?.copyWith(color: themeData.primaryColorLight),
-                  ),
-                ),
-              ],
-            ),
+            _buildResendButton(context, themeData),
             const SizedBox(
               height: 10,
             ),
-            AppButton(
-              text: AppLocalizations.of(context)!.btn_continue,
-              isOutlined: false,
-              gradient: LinearGradient(
-                colors: [
-                  themeData.primaryColor,
-                  themeData.primaryColorLight,
-                ],
-                stops: [0.0, 1.0],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
+            _buildSubmitButton(context, themeData),
           ],
         ),
       ),
+    );
+  }
+
+  AppButton _buildSubmitButton(BuildContext context, ThemeData themeData) {
+    return AppButton(
+      text: AppLocalizations.of(context)!.btn_continue,
+      isOutlined: false,
+      gradient: LinearGradient(
+        colors: [
+          themeData.primaryColor,
+          themeData.primaryColorLight,
+        ],
+        stops: const [0.0, 1.0],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+    );
+  }
+
+  Row _buildResendButton(BuildContext context, ThemeData themeData) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton(
+          onPressed: () {},
+          child: Text(
+            AppLocalizations.of(context)!.btn_resend,
+            style: themeData.textTheme.subtitle1
+                ?.copyWith(color: themeData.primaryColorLight),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row _buildHeader(ThemeData themeData, BuildContext context) {
+    return Row(
+      children: [
+        InkWell(
+          onTap: () {},
+          child: Icon(
+            Icons.arrow_back,
+            color: themeData.primaryColor,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Text(
+          AppLocalizations.of(context)!.verify_otp,
+          style: themeData.textTheme.headline1
+              ?.copyWith(color: themeData.primaryColor),
+        ),
+      ],
     );
   }
 
@@ -145,30 +156,30 @@ class VerifyPhoneAuthView extends StatelessWidget {
         focusNode: focusNode,
         key: Key(key),
         inputType: TextInputType.number,
+        textAlign: TextAlign.center,
+        maxLength: 1,
         onChanged: (txt) {
+          code += txt;
+          code.trim();
           if (txt.length == 1) {
-            code += txt;
             switch (code.length) {
               case 1:
-                focusNode1.requestFocus(focusNode2);
+                FocusScope.of(context).requestFocus(focusNode2);
                 break;
               case 2:
-                focusNode2.requestFocus(focusNode3);
+                FocusScope.of(context).requestFocus(focusNode3);
                 break;
               case 3:
-                focusNode3.requestFocus(focusNode4);
+                FocusScope.of(context).requestFocus(focusNode4);
                 break;
               case 4:
-                focusNode4.requestFocus(focusNode5);
+                FocusScope.of(context).requestFocus(focusNode5);
                 break;
               case 5:
-                focusNode5.requestFocus(focusNode6);
-                break;
-              case 6:
-                focusNode6.unfocus();
+                FocusScope.of(context).requestFocus(focusNode6);
                 break;
               default:
-                FocusManager.instance.primaryFocus?.unfocus();
+                FocusScope.of(context).unfocus();
                 break;
             }
           }

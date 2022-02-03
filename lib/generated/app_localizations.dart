@@ -179,6 +179,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter the verification code sent to '**
   String get verify_view_message;
+
+  /// No description provided for @firstName.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstName;
+
+  /// No description provided for @lastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastName;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @dob.
+  ///
+  /// In en, this message translates to:
+  /// **'Date of Birth'**
+  String get dob;
+
+  /// No description provided for @gender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get gender;
+
+  /// No description provided for @male.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get male;
+
+  /// No description provided for @female.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get female;
+
+  /// No description provided for @bio.
+  ///
+  /// In en, this message translates to:
+  /// **'Bio'**
+  String get bio;
+
+  /// No description provided for @enter_about.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter about'**
+  String get enter_about;
+
+  /// No description provided for @complete_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your Profile'**
+  String get complete_profile;
+
+  /// No description provided for @complete_profile_msg.
+  ///
+  /// In en, this message translates to:
+  /// **'\'Add a profile photo, name and bio to let people know who you are'**
+  String get complete_profile_msg;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

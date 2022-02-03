@@ -15,5 +15,17 @@
     "verify_otp": "Verify OTP",
     "verify": "Verify",
     "btn_resend": "Resend",
-    "verify_view_message": "Enter the verification code sent to "
+    "verify_view_message": "Enter the verification code sent to ",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "dob": "Date of Birth",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    
+    "bio": "Bio",
+    "enter_about": "Enter about",
+    "complete_profile": "Complete your Profile",
+    "complete_profile_msg": "'Add a profile photo, name and bio to let people know who you are"
 }
