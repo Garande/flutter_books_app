@@ -1,10 +1,13 @@
 import 'package:book_mate/generated/app_localizations.dart';
+import 'package:book_mate/models/country.dart';
 import 'package:book_mate/utils/constants.dart';
+import 'package:book_mate/views/sign_in/cubit/sign_in_cubit.dart';
 import 'package:book_mate/views/widgets/app_button.dart';
 import 'package:book_mate/views/widgets/app_textfield.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 class PhoneAuthView extends StatelessWidget {
   const PhoneAuthView({Key? key}) : super(key: key);
@@ -54,6 +57,10 @@ class PhoneAuthView extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
+              onTap: () {
+                // context.read<SignInCubit>().signInWithGoogle();
+                context.read<SignInCubit>().sendOtp();
+              },
             ),
           ],
         ),
@@ -65,8 +72,19 @@ class PhoneAuthView extends StatelessWidget {
     return AppTextField(
       prefix: CountryCodePicker(
         initialSelection: "UG",
-        onChanged: (country) {},
+        onChanged: (country) {
+          context.read<SignInCubit>().countryChanged(
+                Country(
+                  dialCode: country.dialCode,
+                  code: country.code,
+                  name: country.name,
+                ),
+              );
+        },
       ),
+      onChanged: (value) {
+        context.read<SignInCubit>().phoneNumberChanged(value);
+      },
       hintText: AppLocalizations.of(context)!.phone_number,
     );
   }

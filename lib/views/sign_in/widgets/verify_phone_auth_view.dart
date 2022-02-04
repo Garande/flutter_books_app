@@ -1,8 +1,10 @@
 import 'package:book_mate/generated/app_localizations.dart';
 import 'package:book_mate/utils/constants.dart';
+import 'package:book_mate/views/sign_in/cubit/sign_in_cubit.dart';
 import 'package:book_mate/views/widgets/app_button.dart';
 import 'package:book_mate/views/widgets/app_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerifyPhoneAuthView extends StatelessWidget {
   VerifyPhoneAuthView({Key? key}) : super(key: key);
@@ -65,6 +67,9 @@ class VerifyPhoneAuthView extends StatelessWidget {
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
+      onTap: () {
+        context.read<SignInCubit>().verifyPhoneNumber();
+      },
     );
   }
 
@@ -73,7 +78,9 @@ class VerifyPhoneAuthView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            context.read<SignInCubit>().sendOtp();
+          },
           child: Text(
             AppLocalizations.of(context)!.btn_resend,
             style: themeData.textTheme.subtitle1
@@ -161,6 +168,7 @@ class VerifyPhoneAuthView extends StatelessWidget {
         onChanged: (txt) {
           code += txt;
           code.trim();
+          context.read<SignInCubit>().otpChanged(code);
           if (txt.length == 1) {
             switch (code.length) {
               case 1:
@@ -188,26 +196,30 @@ class VerifyPhoneAuthView extends StatelessWidget {
     );
   }
 
-  RichText _buildViewMessage(BuildContext context, ThemeData themeData) {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-            text: AppLocalizations.of(context)!.verify_view_message,
-            style: themeData.textTheme.bodyText1?.copyWith(
-              color: themeData.textTheme.bodyText1?.color?.withOpacity(.7),
-              fontSize: 15.0,
-            ),
+  BlocBuilder _buildViewMessage(BuildContext context, ThemeData themeData) {
+    return BlocBuilder<SignInCubit, SignInState>(
+      builder: (context, state) {
+        return RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: AppLocalizations.of(context)!.verify_view_message,
+                style: themeData.textTheme.bodyText1?.copyWith(
+                  color: themeData.textTheme.bodyText1?.color?.withOpacity(.7),
+                  fontSize: 15.0,
+                ),
+              ),
+              TextSpan(
+                text: '${state.country?.dialCode}${state.phoneNumber}',
+                style: themeData.textTheme.bodyText1?.copyWith(
+                  color: themeData.primaryColorLight.withOpacity(.7),
+                  fontSize: 15.0,
+                ),
+              ),
+            ],
           ),
-          TextSpan(
-            text: '+256779xxxxxxx',
-            style: themeData.textTheme.bodyText1?.copyWith(
-              color: themeData.primaryColorLight.withOpacity(.7),
-              fontSize: 15.0,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
