@@ -1,9 +1,11 @@
+import 'package:book_mate/models/app_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 abstract class BaseAuthenticationProvider {
   Future<bool> isLoggedIn();
 
-  Future<User?> signInWithGoogle();
+  Future<GoogleSignInAccount?> signInWithGoogle();
 
   Future<void> sendOtp({
     required String phoneNumber,
@@ -21,4 +23,6 @@ abstract class BaseAuthenticationProvider {
   });
 
   Future<User?> signInWithCredential(AuthCredential credential);
+
+  Future<void> saveProfile(AppUser user);
 }

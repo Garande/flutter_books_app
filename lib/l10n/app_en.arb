@@ -23,6 +23,7 @@
     "gender": "Gender",
     "male": "Male",
     "female": "Female",
+    "finish": "Finish",
     
     "bio": "Bio",
     "enter_about": "Enter about",

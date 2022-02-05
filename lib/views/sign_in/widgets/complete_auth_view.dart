@@ -1,29 +1,66 @@
 import 'dart:io';
 
 import 'package:book_mate/generated/app_localizations.dart';
+import 'package:book_mate/models/app_user.dart';
 import 'package:book_mate/utils/constants.dart';
+import 'package:book_mate/utils/helpers.dart';
+import 'package:book_mate/views/sign_in/cubit/sign_in_cubit.dart';
+import 'package:book_mate/views/widgets/app_button.dart';
 import 'package:book_mate/views/widgets/app_textfield.dart';
 import 'package:book_mate/views/widgets/avatar.dart';
 import 'package:book_mate/views/widgets/selectable_app_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
-class CompleteAuthView extends StatelessWidget {
+class CompleteAuthView extends StatefulWidget {
   CompleteAuthView({Key? key}) : super(key: key);
 
+  @override
+  State<CompleteAuthView> createState() => _CompleteAuthViewState();
+}
+
+class _CompleteAuthViewState extends State<CompleteAuthView> {
   File? image;
+  String? photoUrl;
 
   List gender = ["MALE", "FEMALE"];
-  String? select;
+
+  String? selectedGender;
+
   bool isLoading = false;
 
   DateTime startDate = DateTime.now();
+
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
+
   DateTime? dateOfBirth;
 
   final dateOfBithController = TextEditingController();
 
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final bioController = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    populateView();
+    super.didChangeDependencies();
+  }
+
+  void populateView() {
+    String name = context.read<SignInCubit>().state.account?.displayName ?? '';
+    List<String> nameSplit = name.split(' ');
+    firstNameController.text = nameSplit[0];
+    nameSplit.removeAt(0);
+    lastNameController.text = nameSplit.join(' ');
+    emailController.text =
+        context.read<SignInCubit>().state.account?.email ?? '';
+    photoUrl = context.read<SignInCubit>().state.account?.photoUrl;
+    // dateOfBithController.text = context.read<SignInCubit>().state.account?.
+  }
+
   void showCalender({required BuildContext context}) async {
-    // var now = DateTime.now();
     final DateTime? picked = await showDatePicker(
       context: context,
       firstDate: DateTime(1920),
@@ -32,8 +69,10 @@ class CompleteAuthView extends StatelessWidget {
     );
 
     if (picked != null) {
-      dateOfBirth = picked;
-      // dateOfBithController.text = Helper.formatDateMonth(picked);
+      setState(() {
+        dateOfBirth = picked;
+        dateOfBithController.text = Helpers.formatDateMonth(picked);
+      });
     }
   }
 
@@ -60,18 +99,21 @@ class CompleteAuthView extends StatelessWidget {
             _buildUserAvatar(context),
             const SizedBox(height: 10),
             AppTextField(
-              label: AppLocalizations.of(context)!.lastName,
-              hintText: AppLocalizations.of(context)!.lastName,
+              label: AppLocalizations.of(context)!.firstName,
+              hintText: AppLocalizations.of(context)!.firstName,
+              controller: firstNameController,
             ),
             const SizedBox(height: 10),
             AppTextField(
               label: AppLocalizations.of(context)!.lastName,
               hintText: AppLocalizations.of(context)!.lastName,
+              controller: lastNameController,
             ),
             const SizedBox(height: 10),
             AppTextField(
               label: AppLocalizations.of(context)!.email,
               hintText: AppLocalizations.of(context)!.email,
+              controller: emailController,
             ),
             const SizedBox(height: 10),
             SelectableAppTextField(
@@ -108,8 +150,42 @@ class CompleteAuthView extends StatelessWidget {
             AppTextField(
               label: AppLocalizations.of(context)!.bio,
               hintText: AppLocalizations.of(context)!.enter_about,
+              controller: bioController,
             ),
             const SizedBox(height: 10),
+            AppButton(
+              text: AppLocalizations.of(context)!.finish,
+              isOutlined: false,
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).primaryColor,
+                  Theme.of(context).primaryColorLight,
+                ],
+                stops: [0.0, 1.0],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              onTap: () {
+                String userId =
+                    '${context.read<SignInCubit>().state.country?.code}${context.read<SignInCubit>().state.phoneNumber}';
+                userId.replaceAll(' ', '');
+                AppUser user = AppUser(
+                  firstName: firstNameController.text,
+                  lastName: lastNameController.text,
+                  email: emailController.text,
+                  dateOfBirthTimeMillis: dateOfBirth?.millisecondsSinceEpoch,
+                  imageUrl: photoUrl,
+                  phoneNumber: context.read<SignInCubit>().state.phoneNumber,
+                  countryCode:
+                      context.read<SignInCubit>().state.country?.dialCode,
+                  bio: bioController.text,
+                  gender: selectedGender,
+                  creationDateTimeMillis: DateTime.now().millisecondsSinceEpoch,
+                  id: userId,
+                );
+                context.read<SignInCubit>().saveUserProfile(user);
+              },
+            ),
           ],
         ),
       ),
@@ -157,9 +233,9 @@ class CompleteAuthView extends StatelessWidget {
       children: [
         Stack(
           children: [
-            const Avatar(
+            Avatar(
               size: 110,
-              photoUrl:
+              photoUrl: photoUrl ??
                   'https://www.goodmorninghdloveimages.com/wp-content/uploads/2020/04/Whatsapp-Profile-Photo-Download-7.jpg',
             ),
             Positioned(
@@ -204,9 +280,11 @@ class CompleteAuthView extends StatelessWidget {
         Radio<String>(
           activeColor: Theme.of(context).colorScheme.secondary,
           value: gender[btnValue],
-          groupValue: select,
+          groupValue: selectedGender,
           onChanged: (value) {
-            select = value;
+            setState(() {
+              selectedGender = value;
+            });
           },
         ),
         Text(

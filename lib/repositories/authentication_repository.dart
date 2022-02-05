@@ -1,6 +1,8 @@
+import 'package:book_mate/models/app_user.dart';
 import 'package:book_mate/providers/authentication_provider.dart';
 import 'package:book_mate/providers/base/base_authentication_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationRepostory {
   final BaseAuthenticationProvider _authenticationProvider =
@@ -8,7 +10,7 @@ class AuthenticationRepostory {
 
   Future<bool> isLoggedIn() => _authenticationProvider.isLoggedIn();
 
-  Future<User?> signInWithGoogle() =>
+  Future<GoogleSignInAccount?> signInWithGoogle() =>
       _authenticationProvider.signInWithGoogle();
 
   Future<void> sendOtp({
@@ -40,4 +42,7 @@ class AuthenticationRepostory {
 
   Future<User?> signInWithCredential(AuthCredential credential) =>
       _authenticationProvider.signInWithCredential(credential);
+
+  Future<void> saveProfile(AppUser user) =>
+      _authenticationProvider.saveProfile(user);
 }

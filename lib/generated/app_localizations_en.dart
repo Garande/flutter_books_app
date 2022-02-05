@@ -71,6 +71,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get female => 'Female';
 
   @override
+  String get finish => 'Finish';
+
+  @override
   String get bio => 'Bio';
 
   @override

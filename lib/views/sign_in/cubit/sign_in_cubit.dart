@@ -4,6 +4,7 @@ import 'package:book_mate/models/country.dart';
 import 'package:book_mate/repositories/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 part 'sign_in_state.dart';
 
@@ -28,6 +29,12 @@ class SignInCubit extends Cubit<SignInState> {
 
   void otpChanged(String otp) {
     emit(state.copyWith(otp: otp));
+  }
+
+  void saveUserProfile(AppUser user) async {
+    emit(state.copyWith(status: SignInStatus.profileUpdateInProgress));
+    await _authenticationRepository.saveProfile(user);
+    emit(state.copyWith(status: SignInStatus.profileUpdateComplete));
   }
 
   Future<void> verifyPhoneNumber() async {
@@ -119,12 +126,13 @@ class SignInCubit extends Cubit<SignInState> {
   Future<void> signInWithGoogle() async {
     emit(state.copyWith(status: SignInStatus.authInProgress));
     try {
-      User? user = await _authenticationRepository.signInWithGoogle();
-      if (user != null) {
+      GoogleSignInAccount? account =
+          await _authenticationRepository.signInWithGoogle();
+      if (account != null) {
         emit(
           state.copyWith(
             status: SignInStatus.googleAuthenticated,
-            googleUser: user,
+            account: account,
           ),
         );
       }
@@ -133,7 +141,7 @@ class SignInCubit extends Cubit<SignInState> {
         state.copyWith(
           status: SignInStatus.exception,
           error: e.toString(),
-          googleUser: null,
+          account: null,
         ),
       );
     }

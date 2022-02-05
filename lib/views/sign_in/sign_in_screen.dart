@@ -72,6 +72,7 @@ class _SignInScreenState extends State<SignInScreen>
                       ),
                     ),
                   );
+                context.read<SignInCubit>().sendOtp();
               }
 
               if (state.status == SignInStatus.otpSent) {
@@ -107,6 +108,43 @@ class _SignInScreenState extends State<SignInScreen>
                       ),
                     ),
                   );
+                _tabController?.animateTo(2);
+              }
+
+              if (state.status == SignInStatus.profileUpdateInProgress) {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.green,
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Updating profile...'),
+                          CircularProgressIndicator(),
+                        ],
+                      ),
+                    ),
+                  );
+              }
+
+              if (state.status == SignInStatus.profileUpdateComplete) {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.green,
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Profile Updated successfully...'),
+                          Icon(Icons.check),
+                        ],
+                      ),
+                    ),
+                  );
+                Navigator.pushReplacementNamed(context, '/home');
+                // context.read<SignInCubit>().sendOtp();
               }
 
               if (state.status == SignInStatus.exception) {

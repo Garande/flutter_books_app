@@ -19,7 +19,7 @@ class SignInState extends Equatable {
   final SignInStatus? status;
   final String? error, phoneNumber, verificationId, otp;
   final int? forceResendToken;
-  final User? googleUser;
+  final GoogleSignInAccount? account;
   final AppUser? appUser;
   final Country? country;
 
@@ -29,7 +29,7 @@ class SignInState extends Equatable {
     this.phoneNumber,
     this.verificationId,
     this.forceResendToken,
-    this.googleUser,
+    this.account,
     this.appUser,
     this.country,
     this.otp,
@@ -41,7 +41,7 @@ class SignInState extends Equatable {
     phoneNumber,
     verificationId,
     int? forceResendToken,
-    User? googleUser,
+    GoogleSignInAccount? account,
     AppUser? appUser,
     Country? country,
     String? otp,
@@ -52,7 +52,7 @@ class SignInState extends Equatable {
       phoneNumber: phoneNumber ?? this.phoneNumber,
       verificationId: verificationId ?? this.verificationId,
       forceResendToken: forceResendToken ?? this.forceResendToken,
-      googleUser: googleUser ?? this.googleUser,
+      account: account ?? this.account,
       appUser: appUser ?? this.appUser,
       country: country ?? this.country,
       otp: otp ?? this.otp,
@@ -66,7 +66,7 @@ class SignInState extends Equatable {
         phoneNumber,
         verificationId,
         forceResendToken,
-        googleUser,
+        account,
         appUser,
         country,
         otp,

@@ -1,5 +1,13 @@
 class AppUser {
-  final String? id, firstName, lastName, email, phoneNumber, imageUrl;
+  final String? id,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      imageUrl,
+      countryCode,
+      gender,
+      bio;
   final int? creationDateTimeMillis, dateOfBirthTimeMillis;
 
   AppUser({
@@ -11,6 +19,9 @@ class AppUser {
     this.imageUrl,
     this.creationDateTimeMillis,
     this.dateOfBirthTimeMillis,
+    this.countryCode,
+    this.gender,
+    this.bio,
   });
 
   factory AppUser.fromJson(Map<String, dynamic> data) {
@@ -23,6 +34,9 @@ class AppUser {
       imageUrl: data['imageUrl'],
       creationDateTimeMillis: data['creationDateTimeMillis'],
       dateOfBirthTimeMillis: data['dateOfBirthTimeMillis'],
+      countryCode: data['countryCode'],
+      gender: data['gender'],
+      bio: data['bio'],
     );
   }
 
@@ -36,6 +50,9 @@ class AppUser {
       'imageUrl': imageUrl,
       'creationDateTimeMillis': creationDateTimeMillis,
       'dateOfBirthTimeMillis': dateOfBirthTimeMillis,
+      'countryCode': countryCode,
+      'gender': gender,
+      'bio': bio,
     };
   }
 }

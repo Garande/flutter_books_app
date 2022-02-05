@@ -58,8 +58,7 @@ class PhoneAuthView extends StatelessWidget {
                 end: Alignment.bottomRight,
               ),
               onTap: () {
-                // context.read<SignInCubit>().signInWithGoogle();
-                context.read<SignInCubit>().sendOtp();
+                context.read<SignInCubit>().signInWithGoogle();
               },
             ),
           ],

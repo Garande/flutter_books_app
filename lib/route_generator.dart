@@ -1,5 +1,6 @@
 import 'package:book_mate/views/docs/privacy_policy_screen.dart';
 import 'package:book_mate/views/docs/terms_and_conditions_screen.dart';
+import 'package:book_mate/views/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -10,6 +11,8 @@ class RouteGenerator {
       case '/terms_and_conditions':
         return MaterialPageRoute(
             builder: (_) => const TermsAndConditionsScreen());
+      case '/home':
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
